@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light only">
+    <title>Shut Down All Projectors</title>
+
+    <link rel="icon" href="https://raw.githubusercontent.com/TotoB12/totob12.github.io/main/things/favicon.ico">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/TotoB12/totob12.github.io/main/things/favicon.ico">
+  
+    <link href="static/style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source Code Pro" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+</head>
+<body>
+    <nav>
+        <p onclick="window.open('https://totob12.github.io/', '_blank');">TOTOB12</p>
+        <img onclick="window.open('https://totob12.github.io/', '_blank');" src='https://github.com/TotoB12/totob12.github.io/blob/main/things/logo.jpg?raw=true' alt='Totob12 Logo'>
+    </nav>
+
+    <main>
+          <div class="left-side">
+            <a onclick="panel_manager()"><span class="material-symbols-outlined">arrow_back_ios</span></a>
+            
+            <div class='full-view'>
+              <h3><div class="green-circle"></div> Online projectors ({{onlines_num}})</h3>
+              <p>{{onlines}}</p>
+            </div>
+          
+            <div class='reduced-view'>
+              <h3><div class="green-circle"></div></h3>
+              <p>{{onlines_num}}</p>
+            </div>
+        </div>
+      
+        <h2>COMMANDS</h2>
+        <form action="/shut_down" method="post">
+            <div>
+                <span class="under"></span>
+                <button class="shutdown-btn" type="submit">Shut All Down</button>
+            </div>
+        </form>
+        
+        <span class="logs-section">
+            <h2>LOGS</h2>
+            <div class='logs'>
+                {{log}}
+            </div>
+        </span>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+
+    <script>
+        if ($(window).width() < 767) {
+          $('.left-side').addClass('minimized');
+        }
+      
+        $('form').submit(function(e) {
+            $('.shutdown-btn').html('<span class="loading material-symbols-outlined">rotate_right</span>');
+            $('.shutdown-btn').prop('disabled', true);
+            $('.logs').text('Please wait up to 2 minutes. Summary will be shown here once all projectors have been shut down.');
+        });
+
+        function panel_manager () {
+          const panel = $('.left-side');
+          if (panel.hasClass('minimized')) {
+            panel.removeClass('minimized');
+          } else {
+            panel.addClass('minimized');
+          }
+        }
+    </script>
+</body>
+</html>

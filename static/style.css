@@ -1,0 +1,207 @@
+:root {
+    --blue: hsl(215, 40%, 40%);
+    --bluehover: hsl(215, 30%, 40%);
+    --darkblue: hsl(222, 39%, 22%);
+    --white: hsl(0, 0%, 90%);
+    --whitehover: hsl(0, 0%, 60%);
+    --red: hsl(0, 100%, 50%);
+    --redgrey: hsl(0, 30%, 50%);
+    --redhover: hsl(0, 100%, 40%);
+    --darkred: hsl(0, 20%, 10%);
+  
+    --navheight: 75px;
+  }
+  
+  * {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  html {
+    width: 100%;
+    height: 100%;
+  }
+  
+  body {
+    overflow-x: hidden;
+    background-color: var(--white);
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+  }
+  
+  @media only screen and (max-width: 767px) {
+    body {
+      grid-template-columns: 0fr 1fr;
+    }
+  }
+  
+  nav {
+    position: fixed;
+    z-index: 9999;
+    background: var(--blue);
+    top: 0;
+    width: 100%;
+    height: var(--navheight);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 10px;
+    padding-right: 15px;
+    gap: 15px;
+  }
+  
+  nav p {
+    font-size: 28px;
+    font-style: bold;
+    font-weight: 900;
+    color: white;
+  }
+  
+  nav img {
+    height: 100%;
+  }
+  
+  .left-side {
+    position: absolute;
+    z-index: 8888;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    max-width: 400px;
+    --padding: 20px;
+    background: var(--darkblue);
+    padding: var(--padding);
+    padding-top: calc(var(--navheight) + var(--padding));
+    color: white;
+    border: 1px solid black;
+    min-width: 0px;
+    transition: width 1s;
+  }
+  
+  .left-side a {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: calc(2 * var(--padding));
+  }
+  
+  .left-side.minimized { width: 55px; }
+  
+  .left-side .reduced-view { display: none; }
+  .left-side.minimized .reduced-view { display: block; }
+  .left-side.minimized .full-view { display: none; }
+  
+  .left-side a span { transition: transform 0.5s; }
+  .left-side.minimized a span { transform: rotate(180deg); }
+  
+  .left-side h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .green-circle {
+    width: 15px;
+    height: 15px;
+    background: rgb(0, 200, 0);
+    border-radius: 50%;
+  }
+  
+  main {
+    position: relative;
+    --padding: 30px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: var(--padding);
+    padding-top: calc(var(--navheight) + var(--padding));
+    padding-left: calc(400px + var(--padding));
+    transition: padding-left 0.5s;
+  }
+  
+  main:has(.left-side.minimized) {
+    padding-left: calc(55px + var(--padding));
+  }
+  
+  main h2 {
+    font-size: 38px;
+    margin: 0;
+  }
+  
+  main form {
+    margin: 5vh 0;
+    display: flex;
+  }
+  
+  main form div {
+    position: relative;
+  }
+  
+  main form div button {
+    background: var(--red);
+    color: white;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 18px 32px;
+    transition-duration: .5s;
+  }
+  
+  main form div .under {
+    position: absolute;
+    z-index: -1;
+    background: var(--darkred);
+    border-radius: 10px;
+    width: 100%;
+    height: 100%;
+    transform: translateY(10%);
+  }
+  
+  main form div button:disabled {
+    background: var(--redgrey);
+  }
+  
+  main form div button:hover:not(button:disabled) {
+    background: var(--redhover);
+  }
+  
+  main form div button:active:not(button:disabled) {
+    background: var(--redhover);
+    transform: translateY(10%);
+  }
+  
+  .loading {
+    animation: loading 2s linear infinite;
+  }
+  
+  @keyframes loading {
+    to {
+      rotate: 360deg;
+    }
+  }
+  
+  .logs-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+  }
+  
+  .logs {
+    margin-top: 20px;
+    border: 1.5px solid black;
+    background: white;
+    color: hsl(0, 0%, 40%);
+    font-family: 'Source Code Pro', monospace;
+    width: 100%;
+    height: 50%;
+    min-height: 200px;
+    padding: 10px;
+  }
